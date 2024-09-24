@@ -12,7 +12,7 @@ coll_input_diagnosis.insert_one(
         "category_name": category, 
         "category_slug":  "_".join(category.lower().split()), 
         "category_description": "",
-        "category_Status": 1,
+        "category_status": 1,
         "parent_category": "",
         "created_at": current_time,
         "updated_at": current_time,
@@ -20,6 +20,6 @@ coll_input_diagnosis.insert_one(
         "updated_by": "1",
         "_is_deleted": 1,
         "sub_category_name": "Oil",
-        "L1": "Oily"
+        "L1": "Mixed"
     }
 )
