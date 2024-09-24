@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "medspa-ai-project"
+version = "0.1.0"
+description = "Project for generating recommendations for Medspa customers"
+authors = ["Salil Trehan <trehansalil1@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^3.0.3"
+poetry = "^1.8.3"
+pymongo = "^4.9.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
