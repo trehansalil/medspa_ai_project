@@ -1,6 +1,6 @@
 PROJECT_NAME:="medspa-ai"
-BIN_LINUX := venv/bin
-BIN_WINDOWS := venv/Scripts/python
+BIN_LINUX := medspa_evn/bin
+BIN_WINDOWS := medspa_evn/Scripts/python
 
 ifeq ($(OS),Windows_NT)
     BIN := $(BIN_WINDOWS)
