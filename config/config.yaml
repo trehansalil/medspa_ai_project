@@ -1,0 +1,15 @@
+artifacts_root: artifacts
+
+
+data_ingestion:
+  input_diagnosis_sheet_id: 1402403750
+  input_diagnosis_relevant_columns: 6
+  input_diagnosis_qt_category: QT_Category
+  input_diagnosis_column1: category_name
+  input_diagnosis_qt_sub_category: QT_Sub Category
+  input_diagnosis_column2: sub_category_name  
+  input_diagnosis_column3: category_slug
+  input_diagnosis_column4: L1
+  input_diagnosis_column5: L2
+  input_diagnosis_column6: L3
+  input_diagnosis_column7: L4
