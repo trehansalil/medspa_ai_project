@@ -18,11 +18,11 @@ class DataIngestion:
             # dataset_url = self.data_ingestion_config.source_url
             # unzip_dir = self.data_ingestion_config.unzip_dir
             # os.makedirs(self.data_ingestion_config.root_dir, exist_ok=True)
-            logging.info(f"Ingesting data from google sheets into to mongo db's collection: {self.data_ingestion_config.coll_input_diagnosis}")
+            logging.info(f"Ingesting data from google sheets into to mongo db's collection: {self.data_ingestion_config.coll_input_diagnosis.name}")
 
             self.gsheet_sync.sync_input_diagnosis_coll_from_gsheet()
 
-            logging.info(f"Ingested data from google sheets into to mongo db's collection: {self.data_ingestion_config.coll_input_diagnosis}")            
+            logging.info(f"Ingested data from google sheets into to mongo db's collection: {self.data_ingestion_config.coll_input_diagnosis.name}")            
             
 
 
