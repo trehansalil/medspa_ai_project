@@ -1,11 +1,9 @@
-from medspa_ai.configuration import *
-
-from medspa_ai.configuration.gcloud_syncer import GSheetSync
+from medspa_ai.pipeline.train_pipeline import DataIngestionTrainingPipeline
 
 
 
 
 
-sheet_puller = GSheetSync()
+data_ingestion = DataIngestionTrainingPipeline()
 
-sheet_puller.sync_input_diagnosis_coll_from_gsheet()
+data_ingestion.main()

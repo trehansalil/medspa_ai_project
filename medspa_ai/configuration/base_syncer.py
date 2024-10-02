@@ -4,15 +4,6 @@ from abc import abstractmethod
 # Importing pandas for data manipulation
 import pandas as pd
 
-# Importing ConfigurationManager from medspa_ai configuration
-from medspa_ai.configuration.configuration import ConfigurationManager
-from medspa_ai.entity.config_entity import DataIngestionConfig
-
-# Creating an instance of ConfigurationManager
-config = ConfigurationManager()
-
-# Getting data ingestion configuration
-ingestion_config: DataIngestionConfig = config.get_data_ingestion_config()
 
 """
 BaseGSheetSync Class:
@@ -26,11 +17,12 @@ class BaseGSheetSync:
     sheet_id (str): The ID of the Google Sheet to be synced.
     """
 
-    def __init__(self, sheet_id):
+    def __init__(self, sheet_id, gsheet_url):
         """
-        Initializes the BaseGSheetSync object with the given sheet_id.
+        Initializes the BaseGSheetSync object with the given sheet_id and gsheet_url.
         """
         self.sheet_id = sheet_id
+        self.gsheet_url = gsheet_url
 
     @abstractmethod
     def read_data_from_sheet(self) -> pd.DataFrame:
@@ -42,9 +34,7 @@ class BaseGSheetSync:
         pd.DataFrame: The data read from the Google Sheet.
         """
         # Generate the link to the Google Sheet in CSV format
-        sheet_link = f"{ingestion_config.g_sheets_url}/export?format=csv&gid={self.sheet_id}"
-
-        print(sheet_link)
+        sheet_link = f"{self.gsheet_url}/export?format=csv&gid={self.sheet_id}"
 
         # Read the data from the sheet using the generated link
         df = pd.read_csv(sheet_link)
