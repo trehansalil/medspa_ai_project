@@ -11,6 +11,7 @@ from bson import ObjectId
 from tqdm import tqdm 
 
 import pandas as pd
+from medspa_ai.logger import logging
 from medspa_ai.configuration.base_syncer import BaseGSheetSync, ingestion_config
 
 
@@ -41,8 +42,8 @@ class GSheetSync(BaseGSheetSync):
         # Rename columns as per requirements
         self.df.rename(
             columns={
-                ingestion_config.input_diagnosis_qt_category: ingestion_config.input_diagnosis_replace1, 
-                ingestion_config.input_diagnosis_qt_sub_category: ingestion_config.input_diagnosis_replace2
+                ingestion_config.input_diagnosis_qt_category: ingestion_config.input_diagnosis_column1, 
+                ingestion_config.input_diagnosis_qt_sub_category: ingestion_config.input_diagnosis_column2
                 }, inplace=True
             )
 
@@ -58,8 +59,17 @@ class GSheetSync(BaseGSheetSync):
 
         # Create a new column by applying a transformation to an existing column
         self.df[ingestion_config.input_diagnosis_column3] = \
-            self.df[ingestion_config.input_diagnosis_replace1].apply(lambda x: "_".join(x.lower().split()))
+            self.df[ingestion_config.input_diagnosis_column1].apply(lambda x: "_".join(x.lower().split()))
 
+        # Re-arranging the columns
+        cols = [
+            ingestion_config.input_diagnosis_column1, ingestion_config.input_diagnosis_column2, 
+            ingestion_config.input_diagnosis_column3, ingestion_config.input_diagnosis_column4,
+            ingestion_config.input_diagnosis_column5, ingestion_config.input_diagnosis_column6,
+            ingestion_config.input_diagnosis_column7]
+        
+        self.df = self.df[cols]
+        
     @staticmethod
     def row_to_json(row):
         """
@@ -106,8 +116,7 @@ class GSheetSync(BaseGSheetSync):
         }        
 
         # Convert raw_df rows to JSON and insert into the database
-        for i, row in tqdm(self.df.iterrows()):
-            json_data = self.row_to_json(row)
-            record = metadata.copy()  # Create a copy of metadata to avoid modifying the original
-            record.update(json_data)
+        for _, row in tqdm(self.df.iterrows()):
+            record = self.row_to_json(row)
+            record.update(metadata)
             ingestion_config.coll_input_diagnosis.insert_one(record)
