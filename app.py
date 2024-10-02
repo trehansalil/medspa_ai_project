@@ -1,8 +1,4 @@
 from medspa_ai.configuration import *
-from datetime import datetime
-from bson import ObjectId
-import pandas as pd
-import json
 
 from medspa_ai.configuration.gcloud_syncer import GSheetSync
 
