@@ -1,7 +1,6 @@
-# Requires the PyMongo package.
-# https://api.mongodb.com/python/current
 import configparser
 import os
+from pathlib import Path
 
 config_path = os.path.join(os.getcwd(), "config_file.config")
 
@@ -15,3 +14,6 @@ mongo_db_coll_input_diagnosis = config_parser.get('mongo_config', 'mongo_db_coll
 
 # All file inputs
 g_sheets_url = config_parser.get('input_files', 'g_sheets_url')
+
+CONFIG_FILE_PATH = Path("config/config.yaml")
+PARAMS_FILE_PATH = Path("params.yaml")
